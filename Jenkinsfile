@@ -1,20 +1,11 @@
 pipeline {
     agent any
+    
+   
 
     stages {
-        stage('List Pods') {
-            steps {
-                script {
-                    withKubeConfig([credentialsId: 'kubernetes-config']) {
-                        sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'
-                        sh 'chmod u+x ./kubectl'
-                        sh './kubectl get pods'
-                    }
-                }
-            }
-        }
-
-        stage('Deploy to Kubernetes') {
+        
+    stage('Deploy to Kubernetes') {
             steps {
                 script {
                     sh "kubectl apply -f deploy.yaml"
@@ -22,6 +13,4 @@ pipeline {
             }
         }
     }
-
-   
 }
