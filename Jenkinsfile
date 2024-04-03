@@ -1,9 +1,14 @@
 pipeline {
     agent any
+    
+   
+
     stages {
-        stage('deploy') {
+    stage('Deploy to Kubernetes') {
             steps {
-                echo 'hello world'
+                script {
+                    sh "kubectl apply -f deploy.yaml"
+                }
             }
         }
     }
