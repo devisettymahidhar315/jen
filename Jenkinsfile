@@ -1,14 +1,12 @@
 pipeline {
     agent any
-
-    stages {
-        stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    sh "/usr/bin/kubectl apply -f deploy.yaml"
-                }
-            }
+     stage('Deploying App to Kubernetes') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "deploy.yaml", kubeconfigId: "kubernetes")
         }
+      }
     }
 
+  }
 }
