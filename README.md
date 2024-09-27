@@ -22,5 +22,27 @@ Python models/segformer/main.py
 ```
 
 ## Expected Demo Results
+Pytorch Model Validation(Baseline)
+Accuracy: 42.9%
+Converting to onnx
+Accuracy: 42.9%
+Onnx to Pytorch Conversion
+Accuracy: 42.9%
+Tvm Complitation without optimization
+I have consider 2 differnt target cpu. namely 'llvm -mcpu=core-avx2', 'llvm
+target: llvm -mcpu=core-avx2
+Accuracy : 42.9%
+Cpu_Usage : 10.8%
+Ram_usage : 31.25%
+Inference_time: 1.01sec
+target: llvm
+Accuracy : 42.9%
+Cpu_Usage : 11.25%
+Ram_usage : 32.6%
+Inference_time: 1.267sec
+<img width="281" alt="image" src="https://github.com/user-attachments/assets/029c8387-569f-4a99-afc9-b42902ea62af">
+
+
+
 
 
