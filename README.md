@@ -22,6 +22,7 @@ Python models/segformer/main.py
 ```
 
 ## Expected Demo Results
+```
 Pytorch Model Validation(Baseline)
 Accuracy: 42.9%
 Converting to onnx
@@ -42,7 +43,7 @@ Ram_usage : 32.6%
 Inference_time: 1.267sec
 <img width="281" alt="image" src="https://github.com/user-attachments/assets/029c8387-569f-4a99-afc9-b42902ea62af">
 
-
+```
 
 
 
