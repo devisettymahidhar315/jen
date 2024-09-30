@@ -1,49 +1,52 @@
-# TVM CPU optimisation for segformer-b0-finetuned-ade-512-512
+#Yolov7 Demo
 
 ## Introduction
-We are optimizing the SegFormer semantic segmentation model using TVM with various CPUs as the target. In this repository, we first convert the PyTorch model to ONNX, then back to PyTorch, validating accuracy at each stage. Next, we convert the model to TVM for different targets, measuring inference time, CPU utilization, and accuracy for each CPU backend. After applying optimizations and tuning the model, we assess the inference time and accuracy again. The ADE-512-512 dataset is used for the entire process.
+**YOLOv7** is a cutting-edge deep learning architecture designed for real-time object detection tasks, offering both high speed and accuracy. By employing an optimized convolutional neural network (CNN) backbone, YOLOv7 effectively detects objects in images with remarkable efficiency. It utilizes advanced feature extraction techniques and novel model scaling strategies, which enable it to capture both small and large objects in diverse scenes with minimal computational overhead.
 
-## Dataset
-We have four images, consisting of two sets. Each set contains an original image (multi-dimensional) and a corresponding semantic image (1-dimensional).
+## Folder Structure
 
-## Main
-As we above disscuused pytorch to onnx , onnx to pytorch and tvm without opmization and tvm with optmization ,we have the entire code in `main.py`.
-- **Model** : I imported the model directly from the Transformers library.
-- **Input Resolution** : I imported the images from the Hugging Face URL.
-- **Input Preprocessing** : wrote the torchvision.transforms code to convert the image into a tensor of size (512,512).
-- **Batch Size** : The demo is tested with a batch size of **1**.
-- **Cpu targets** : llvm and llvm -mcpu=core-avx2
-- **Tuners** : Random, Grid Search and Xgb
-
-## Running
-Run the entire code
-```bash
-Python models/segformer/main.py
+```plaintext
+models/
+└── yolov7/
+    ├── reference/
+    │   ├── yolov7.py                 # yolov7 model implementation
+    │   ├── yolov7_utils.py           # Utility functions for yolov7
+    |   ├── yolov7_config.py          # Yolov7 model architecture
+    ├── tests/
+    │   ├── test_yolov7.py            # Unit tests for Yolov7 model
+    │   ├── test_demo_yolov7.py       # Whole Model test Setup
+    └── README.md                         
 ```
+
+# Details
+
+- **Implementation Source**: (https://github.com/WongKinYiu/yolov7)
+
+- The reference model is implemented in `yolov7/reference/yolov7.py`. Utility methods are included in `yolov7/reference/yolov7_utils.py`.Model architecture is included as config file in`yolov7/reference/yolov7_config.py`.
+
+- Each sub-module of this reference model is validated against the original Transformers package using the **Pearson Correlation Coefficient (PCC)** metric to ensure accuracy.
+
+- Unit tests for sub-modules are located in `yolov7/tests/test_yolov7.py` for input resolutions of Images - `(733*733),(512*512)` with `batch size of 1`.
+
+- This reference implementation uses pre-trained model weights from the github repo(https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7.pt)
+
+## Commands to Run
+
+### To run all the tests with logging output:
+
+```pytest models/yolov7/```
+
+This will return both the test results.
+
+### To run the demo test alone:
+
+```pytest models/yolov7/tests/test_demo_yolov7.py -s```
+
+
+### To run sub-module tests alone:
+
+```pytest models/yolov7/tests/test_yolov7.py```
 
 ## Expected Demo Results
-```
-Pytorch Model Validation(Baseline)
-Accuracy: 42.9%
-Converting to onnx
-Accuracy: 42.9%
-Onnx to Pytorch Conversion
-Accuracy: 42.9%
-Tvm Complitation without optimization
-I have consider 2 differnt target cpu. namely 'llvm -mcpu=core-avx2', 'llvm
-target: llvm -mcpu=core-avx2
-Accuracy : 42.9%
-Cpu_Usage : 10.8%
-Ram_usage : 31.25%
-Inference_time: 1.01sec
-target: llvm
-Accuracy : 42.9%
-Cpu_Usage : 11.25%
-Ram_usage : 32.6%
-Inference_time: 1.267sec
 
-```
-<img width="281" alt="image" src="https://github.com/user-attachments/assets/029c8387-569f-4a99-afc9-b42902ea62af">
-
-
-
+```The runs folder will be created inside the tests folder. For reference, the model output will be stored in reference_output, while the Torch model output will be stored in torch_output.```
