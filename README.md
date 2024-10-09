@@ -50,3 +50,6 @@ This will return both the test results.
 ## Expected Demo Results
 
 ```The runs folder will be created inside the tests folder. For reference, the model output will be stored in reference_output, while the Torch model output will be stored in torch_output.```
+
+
+<img width="305" alt="image" src="https://github.com/user-attachments/assets/0d2b5b7d-9786-41aa-9688-54b4e7aca3bf">
