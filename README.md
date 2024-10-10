@@ -52,4 +52,4 @@ This will return both the test results.
 ```The runs folder will be created inside the tests folder. For reference, the model output will be stored in reference_output, while the Torch model output will be stored in torch_output.```
 
 
-<img width="305" alt="image" src="https://github.com/user-attachments/assets/0d2b5b7d-9786-41aa-9688-54b4e7aca3bf">
+<img width="239" alt="image" src="https://github.com/user-attachments/assets/529f2814-2b05-44b6-8478-4d6eb505b0f8">
